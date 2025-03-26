@@ -7,14 +7,14 @@ type Props = {};
 
 const Navbar = (props: Props) => {
 	return (
-		<nav className='flex justify-between items-center px-10 py-2 text-2xl'>
+		<nav className='flex justify-between items-center px-10 py-4 text-2xl'>
 			<div>
 				<a href='/' className='hover:text-[var(--color-accent)]'>
 					EvalAI
 				</a>
 			</div>
 
-			<div className='space-x-5 flex'>
+			<div className='space-x-10 flex'>
 				<a
 					href='/interview'
 					className='hover:text-[var(--color-accent)]'
