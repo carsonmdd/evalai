@@ -8,65 +8,24 @@ import React, { useEffect, useRef, useState } from 'react';
 type Props = {};
 
 const Interview = (props: Props) => {
+	/*
+		AI sends question
+		User responds
+		Save question/response in database
+		Repeat until all questions answered
+		Generate and save report
+			For each question, generate score, strengths, improvements
+
+	*/
+
 	const [interviewStarted, setInterviewStarted] = useState(false);
-	const [questions, setQuestions] = useState([]);
+	const [questions, setQuestions] = useState<string[]>([]);
+	const [responses, setResponses] = useState<string[]>([]);
+	const [messages, setMessages] = useState<
+		{ sender: string; text: string }[]
+	>([]);
 	const [jobDescription, setJobDescription] = useState('');
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
-
-	const messages = [
-		{
-			text: 'Tell me about a time you had to learn a new technology quickly. How did you approach it, and what was the outcome?',
-			sender: 'ai',
-		},
-		{
-			text: 'I had to learn tRPC for Dionysus and it was really difficult.',
-			sender: 'user',
-		},
-		{
-			text: 'Tell me about a time you had to learn a new technology quickly. How did you approach it, and what was the outcome?',
-			sender: 'ai',
-		},
-		{
-			text: 'I had to learn tRPC for Dionysus and it was really difficult.',
-			sender: 'user',
-		},
-		{
-			text: 'Tell me about a time you had to learn a new technology quickly. How did you approach it, and what was the outcome?',
-			sender: 'ai',
-		},
-		{
-			text: 'I had to learn tRPC for Dionysus and it was really difficult.',
-			sender: 'user',
-		},
-		{
-			text: 'Tell me about a time you had to learn a new technology quickly. How did you approach it, and what was the outcome?',
-			sender: 'ai',
-		},
-		{
-			text: 'I had to learn tRPC for Dionysus and it was really difficult.',
-			sender: 'user',
-		},
-		{
-			text: 'Tell me about a time you had to learn a new technology quickly. How did you approach it, and what was the outcome?',
-			sender: 'ai',
-		},
-		{
-			text: 'I had to learn tRPC for Dionysus and it was really difficult.',
-			sender: 'user',
-		},
-		{
-			text: 'Tell me about a time you had to learn a new technology quickly. How did you approach it, and what was the outcome?',
-			sender: 'ai',
-		},
-		{
-			text: 'I had to learn tRPC for Dionysus and it was really difficult.',
-			sender: 'user',
-		},
-		{
-			text: 'TESTINGGG',
-			sender: 'user',
-		},
-	];
 
 	const handleStartInterview = async () => {
 		const response = await axios.post('/api/generateQuestions', {
@@ -74,7 +33,20 @@ const Interview = (props: Props) => {
 		});
 
 		setQuestions(response.data.questions);
+		messages.push({
+			sender: 'ai',
+			text: response.data.questions[0],
+		});
 		setInterviewStarted(true);
+	};
+
+	const handleResponseSubmit = (response: string) => {
+		setResponses((prevResponses) => [...prevResponses, response]);
+
+		setMessages((prevMessages) => [
+			...prevMessages,
+			{ sender: 'user', text: response },
+		]);
 	};
 
 	useEffect(() => {
@@ -82,7 +54,7 @@ const Interview = (props: Props) => {
 		if (chatContainer) {
 			chatContainer.scrollTop = chatContainer.scrollHeight;
 		}
-	}, [messages]);
+	}, [questions, responses]);
 
 	return (
 		<>
@@ -115,7 +87,7 @@ const Interview = (props: Props) => {
 							/>
 						))}
 					</div>
-					<ResponseBar />
+					<ResponseBar onSubmitResponse={handleResponseSubmit} />
 				</div>
 			)}
 		</>

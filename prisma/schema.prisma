@@ -15,13 +15,47 @@ datasource db {
 }
 
 model User {
-    id String @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    imageUrl String?
-    firstName String?
-    lastName String?
+  imageUrl String?
+  firstName String?
+  lastName String?
 
-    email String @unique
+  email String @unique
+}
+
+model Interview {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  jobDesc String
+  score Int
+  
+  reportId String @unique
+  report Report @relation(fields: [reportId], references: [id])
+}
+
+model Report {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  jobDesc String
+  questionResponses QuestionResponse[]
+
+  interview Interview?
+}
+
+model QuestionResponse {
+  id String @id @default(cuid())
+
+  question String
+  response String
+  score Int
+  strengths String
+  improv String
+
+  reportId String
+  report Report @relation(fields: [reportId], references: [id])
 }
