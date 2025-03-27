@@ -7,7 +7,7 @@ type Props = {};
 
 const Navbar = (props: Props) => {
 	return (
-		<nav className='flex justify-between items-center px-10 py-4 text-2xl'>
+		<nav className='fixed w-full flex justify-between items-center px-10 py-4 text-2xl'>
 			<div>
 				<a href='/' className='hover:text-[var(--color-accent)]'>
 					EvalAI
