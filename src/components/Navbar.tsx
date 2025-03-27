@@ -1,11 +1,19 @@
 'use client';
 
-import React from 'react';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import React, { useEffect, useState } from 'react';
+import {
+	SignInButton,
+	SignedIn,
+	SignedOut,
+	UserButton,
+	useAuth,
+} from '@clerk/nextjs';
 
 type Props = {};
 
 const Navbar = (props: Props) => {
+	const { isLoaded, isSignedIn } = useAuth();
+
 	return (
 		<nav className='fixed z-10 w-full flex justify-between items-center px-10 py-4 text-2xl'>
 			<div>
@@ -30,9 +38,11 @@ const Navbar = (props: Props) => {
 				<SignedOut>
 					<SignInButton />
 				</SignedOut>
-				<SignedIn>
+				{isLoaded ? (
 					<UserButton />
-				</SignedIn>
+				) : (
+					<div className='w-[28px] h-[28px] bg-gray-400 rounded-full' />
+				)}
 			</div>
 		</nav>
 	);
