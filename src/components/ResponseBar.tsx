@@ -16,6 +16,13 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 		}
 	};
 
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault();
+			handleSendResponse();
+		}
+	};
+
 	return (
 		<div className='absolute bottom-6 h-auto gap-3 rounded-lg py-3 px-5 bg-[var(--color-light-gray)] flex items-end justify-between w-[48rem]'>
 			<textarea
@@ -23,11 +30,12 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 				placeholder='Type a response here'
 				rows={5}
 				onChange={(e) => setResponse(e.target.value)}
+				onKeyDown={handleKeyDown}
 				value={response}
 			></textarea>
 			<button
 				onClick={() => handleSendResponse()}
-				className='cursor-pointer border-2 border-[var(--color-accent)] w-8 h-8 rounded-xl'
+				className='hover:bg-[#606060] cursor-pointer border-2 border-[var(--color-accent)] w-8 h-8 rounded-xl'
 			>
 				<FontAwesomeIcon icon={faArrowUp} size='lg' />
 			</button>

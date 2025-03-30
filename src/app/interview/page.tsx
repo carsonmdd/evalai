@@ -11,7 +11,6 @@ const Interview = (props: Props) => {
 	/*
 		AI sends question
 		User responds
-		Save question/response in database
 		Repeat until all questions answered
 		Generate and save report
 			For each question, generate score, strengths, improvements
@@ -19,8 +18,12 @@ const Interview = (props: Props) => {
 	*/
 
 	const [interviewStarted, setInterviewStarted] = useState(false);
+	const [interviewEnded, setInterviewEnded] = useState(false);
 	const [questions, setQuestions] = useState<string[]>([]);
-	const [responses, setResponses] = useState<string[]>([]);
+	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+	const [questionResponses, setQuestionResponses] = useState<
+		{ question: string; response: string }[]
+	>([]);
 	const [messages, setMessages] = useState<
 		{ sender: string; text: string }[]
 	>([]);
@@ -33,20 +36,37 @@ const Interview = (props: Props) => {
 		});
 
 		setQuestions(response.data.questions);
-		messages.push({
-			sender: 'ai',
-			text: response.data.questions[0],
-		});
+		sendMessage('ai', response.data.questions[0]);
 		setInterviewStarted(true);
 	};
 
 	const handleResponseSubmit = (response: string) => {
-		setResponses((prevResponses) => [...prevResponses, response]);
+		sendMessage('user', response);
 
-		setMessages((prevMessages) => [
-			...prevMessages,
-			{ sender: 'user', text: response },
-		]);
+		const updatedResponses = [
+			...questionResponses,
+			{ question: questions[currentQuestionIndex], response },
+		];
+		setQuestionResponses(updatedResponses);
+		if (currentQuestionIndex < questions.length - 1) {
+			// Move to next question
+			sendMessage('ai', questions[currentQuestionIndex + 1]);
+			setCurrentQuestionIndex((prev) => prev + 1);
+		} else {
+			// Generate report
+			axios.post('/api/generateReport', {
+				questionResponses: updatedResponses,
+			});
+			sendMessage(
+				'ai',
+				'Thank you for completing the interview! I will generate feedback for you shortly.'
+			);
+			setInterviewEnded(true);
+		}
+	};
+
+	const sendMessage = (sender: string, text: string) => {
+		setMessages((prevMessages) => [...prevMessages, { sender, text }]);
 	};
 
 	useEffect(() => {
@@ -54,7 +74,7 @@ const Interview = (props: Props) => {
 		if (chatContainer) {
 			chatContainer.scrollTop = chatContainer.scrollHeight;
 		}
-	}, [questions, responses]);
+	}, [messages]);
 
 	return (
 		<>
@@ -77,7 +97,7 @@ const Interview = (props: Props) => {
 				<div className='grow flex flex-col items-center justify-end pb-20 relative'>
 					<div
 						ref={chatContainerRef}
-						className='w-[48rem] h-[48rem] mb-4 flex flex-col overflow-y-auto'
+						className='w-[52rem] h-[48rem] mb-4 flex flex-col overflow-y-auto shadow-md p-3 bg-[#3a3a3a] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message
@@ -87,7 +107,15 @@ const Interview = (props: Props) => {
 							/>
 						))}
 					</div>
-					<ResponseBar onSubmitResponse={handleResponseSubmit} />
+					{interviewEnded ? (
+						<>
+							<button className='cursor-pointer text-[var(--color-accent)]'>
+								View report
+							</button>
+						</>
+					) : (
+						<ResponseBar onSubmitResponse={handleResponseSubmit} />
+					)}
 				</div>
 			)}
 		</>
