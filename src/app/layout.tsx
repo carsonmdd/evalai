@@ -31,7 +31,7 @@ export default function RootLayout({
 					className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col`}
 				>
 					<Navbar />
-					{children}
+					<div className='mt-[7rem]'>{children}</div>
 				</body>
 			</html>
 		</ClerkProvider>

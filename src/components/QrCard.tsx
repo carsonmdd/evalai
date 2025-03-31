@@ -1,10 +1,62 @@
 import React from 'react';
 
-type Props = {};
+type Props = {
+	question: string;
+	response: string;
+	score: number;
+	strengths: string;
+	improv: string;
+	classes?: string;
+};
 
-const QrCard = (props: Props) => {
+const QrCard = ({
+	question,
+	response,
+	score,
+	strengths,
+	improv,
+	classes,
+}: Props) => {
 	return (
-		<div className='w-[100px] h-[100px] border border-red-500'>QrCard</div>
+		<div
+			className={`border-2 border-[var(--color-light-purple)] rounded-xl p-6 w-[50rem] flex flex-col text-lg ${classes}`}
+		>
+			<div className='space-y-2'>
+				<p>
+					<span className='text-[var(--color-accent)] font-bold'>
+						Question{' '}
+					</span>
+					{question}
+				</p>
+				<p>
+					<span className='text-[var(--color-accent)] font-bold'>
+						Response:{' '}
+					</span>
+					{response}
+				</p>
+			</div>
+			<hr className='my-6 w-11/12 self-center' />
+			<div className='space-y-2'>
+				<p>
+					<span className='text-[var(--color-accent)] font-bold'>
+						Score:{' '}
+					</span>
+					{`${score}/10`}
+				</p>
+				<p>
+					<span className='text-[var(--color-accent)] font-bold'>
+						Strengths:{' '}
+					</span>
+					{strengths}
+				</p>
+				<p>
+					<span className='text-[var(--color-accent)] font-bold'>
+						Areas for improvement:{' '}
+					</span>
+					{improv}
+				</p>
+			</div>
+		</div>
 	);
 };
 

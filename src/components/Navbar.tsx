@@ -15,7 +15,7 @@ const Navbar = (props: Props) => {
 	const { isLoaded, isSignedIn } = useAuth();
 
 	return (
-		<nav className='fixed z-10 w-full flex justify-between items-center px-10 py-4 text-2xl'>
+		<nav className='fixed z-10 w-full flex justify-between items-center px-10 py-4 text-2xl font-bold bg-[var(--color-light-gray)]'>
 			<div>
 				<a href='/' className='hover:text-[var(--color-accent)]'>
 					EvalAI

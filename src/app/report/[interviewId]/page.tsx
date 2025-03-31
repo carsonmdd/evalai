@@ -25,17 +25,35 @@ const Reports = async (props: Props) => {
 					<p>Interview not found</p>
 				</div>
 			) : (
-				<div className='grow flex flex-col items-center justify-center'>
+				<div className='grow flex flex-col items-center justify-center text-xl'>
 					<div>
 						<h1 className='text-2xl font-bold mb-4'>
 							{`Interview Report for ${formattedTime}`}
 						</h1>
-						<p>{`Overall Score: ${interview.overallScore}/10`}</p>
-						<p>{`Job Description: ${interview.jobDesc}`}</p>
+						<p>
+							<span className='text-[var(--color-accent)] font-bold'>
+								Overall Score:{' '}
+							</span>
+							{`${interview.overallScore}/10`}
+						</p>
+						<p>
+							<span className='text-[var(--color-accent)] font-bold'>
+								Job Description:{' '}
+							</span>
+							{interview.jobDesc}
+						</p>
 					</div>
-					<hr className='my-4 w-[700px]' />
+					<hr className='my-8 w-[700px]' />
 					{interview.questionResponses.map((qr, index) => (
-						<QrCard key={index} />
+						<QrCard
+							key={index}
+							question={qr.question}
+							response={qr.response}
+							score={qr.score}
+							strengths={qr.strengths}
+							improv={qr.improv}
+							classes='mb-4'
+						/>
 					))}
 				</div>
 			)}
