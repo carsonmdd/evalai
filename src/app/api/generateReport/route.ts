@@ -129,5 +129,8 @@ export async function POST(request: Request) {
 		questionResponses: reportQrs,
 	});
 
-	return Response.redirect(`/report/${interview.id}`, 302);
+	return new Response(JSON.stringify({ interview }), {
+		status: 200,
+		headers: { 'Content-Type': 'application/json' },
+	});
 }

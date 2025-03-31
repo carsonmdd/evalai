@@ -19,7 +19,6 @@ const Interview = (props: Props) => {
 
 	const [interviewStarted, setInterviewStarted] = useState(false);
 	const [startTime, setStartTime] = useState<Date | null>(null);
-	const [interviewEnded, setInterviewEnded] = useState(false);
 	const [questions, setQuestions] = useState<string[]>([]);
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [questionResponses, setQuestionResponses] = useState<
@@ -29,6 +28,7 @@ const Interview = (props: Props) => {
 		{ sender: string; text: string }[]
 	>([]);
 	const [jobDescription, setJobDescription] = useState('');
+	const [interviewId, setInterviewId] = useState('');
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
 	const handleStartInterview = async () => {
@@ -42,7 +42,7 @@ const Interview = (props: Props) => {
 		setStartTime(new Date());
 	};
 
-	const handleResponseSubmit = (response: string) => {
+	const handleResponseSubmit = async (response: string) => {
 		sendMessage('user', response);
 
 		const updatedResponses = [
@@ -56,16 +56,17 @@ const Interview = (props: Props) => {
 			setCurrentQuestionIndex((prev) => prev + 1);
 		} else {
 			// Generate report
-			axios.post('/api/generateReport', {
-				startTime,
-				jobDesc: jobDescription,
-				questionResponses: updatedResponses,
-			});
 			sendMessage(
 				'ai',
 				'Thank you for completing the interview! I will generate feedback for you shortly.'
 			);
-			setInterviewEnded(true);
+
+			const response = await axios.post('/api/generateReport', {
+				startTime,
+				jobDesc: jobDescription,
+				questionResponses: updatedResponses,
+			});
+			setInterviewId(response.data.interview.id);
 		}
 	};
 
@@ -111,11 +112,14 @@ const Interview = (props: Props) => {
 							/>
 						))}
 					</div>
-					{interviewEnded ? (
+					{interviewId ? (
 						<>
-							<button className='cursor-pointer text-[var(--color-accent)]'>
+							<a
+								href={`/report/${interviewId}`}
+								className='cursor-pointer text-[var(--color-accent)]'
+							>
 								View report
-							</button>
+							</a>
 						</>
 					) : (
 						<ResponseBar onSubmitResponse={handleResponseSubmit} />
