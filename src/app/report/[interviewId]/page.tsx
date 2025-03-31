@@ -22,7 +22,7 @@ const Reports = async (props: Props) => {
 		<>
 			{!interview ? (
 				<div className='grow flex flex-col items-center justify-center'>
-					<p>Interview not found</p>
+					<p className='text-red-500'>Interview not found</p>
 				</div>
 			) : (
 				<div className='grow flex flex-col items-center justify-center text-xl'>

@@ -78,7 +78,7 @@ const Interview = (props: Props) => {
 	return (
 		<>
 			{!interviewStarted ? (
-				<div className='grow flex flex-col items-center justify-center'>
+				<div className='grow flex flex-col items-center justify-center mt-[3rem]'>
 					<h1 className='font-bold text-3xl mb-6'>Job Description</h1>
 					<textarea
 						className='bg-[var(--color-light-gray)] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl'
@@ -96,7 +96,7 @@ const Interview = (props: Props) => {
 				<div className='grow flex flex-col items-center justify-end pb-20 relative'>
 					<div
 						ref={chatContainerRef}
-						className='w-[52rem] h-[48rem] mb-4 flex flex-col overflow-y-auto shadow-md p-3 bg-[#3a3a3a] rounded-lg'
+						className='w-[52rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md p-3 bg-[#3a3a3a] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message
