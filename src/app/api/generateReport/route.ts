@@ -78,8 +78,8 @@ export async function POST(request: Request) {
 		schema: z.array(
 			z.object({
 				questionNumber: z.number().int().min(1),
-				score: z.number().min(1).max(10),
-				strenghts: z.string(),
+				score: z.number().int().min(1).max(10),
+				strengths: z.string(),
 				areasForImprovement: z.string(),
 			})
 		),
@@ -107,14 +107,26 @@ export async function POST(request: Request) {
 		`,
 	});
 
-	const finalReport = questionResponses.map(
+	const overallScore = parseFloat(
+		(
+			object.reduce((acc, curr) => acc + curr.score, 0) / object.length
+		).toFixed(2)
+	);
+
+	const reportQrs = questionResponses.map(
 		(qr: QuestionResponse, index: number) => ({
 			...qr,
 			...object.find((o) => o.questionNumber === index + 1),
 		})
 	);
 
-	console.log(finalReport);
+	const finalReport = {
+		overallScore,
+		feedback: reportQrs,
+	};
+
+	console.log('Final Report:', finalReport);
+
 	return new Response(JSON.stringify(finalReport), {
 		status: 200,
 		headers: { 'Content-Type': 'application/json' },
