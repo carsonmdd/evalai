@@ -120,7 +120,7 @@ export async function POST(request: Request) {
 		}
 	);
 
-	await createInterview({
+	const interview = await createInterview({
 		interviewData: {
 			startTime,
 			jobDesc,
@@ -129,7 +129,5 @@ export async function POST(request: Request) {
 		questionResponses: reportQrs,
 	});
 
-	return new Response(null, {
-		status: 204,
-	});
+	return Response.redirect(`/report/${interview.id}`, 302);
 }

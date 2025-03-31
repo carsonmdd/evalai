@@ -47,7 +47,7 @@ export const createInterview = async ({
 	questionResponses: Omit<QuestionResponse, 'id' | 'interviewId'>[];
 }) => {
 	try {
-		const report = await prisma.interview.create({
+		const interview = await prisma.interview.create({
 			data: {
 				...interviewData,
 				questionResponses: {
@@ -55,9 +55,26 @@ export const createInterview = async ({
 				},
 			},
 		});
-		return report;
+		return interview;
 	} catch (e) {
 		console.error(e);
-		throw new Error('Failed to create report');
+		throw new Error('Failed to create interview');
+	}
+};
+
+export const getInterview = async (interviewId: string) => {
+	try {
+		const interview = await prisma.interview.findUnique({
+			where: {
+				id: interviewId,
+			},
+			include: {
+				questionResponses: true,
+			},
+		});
+		return interview;
+	} catch (e) {
+		console.error(e);
+		throw new Error('Failed to fetch interview');
 	}
 };

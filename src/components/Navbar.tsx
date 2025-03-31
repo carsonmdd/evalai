@@ -29,9 +29,6 @@ const Navbar = (props: Props) => {
 				>
 					Interview
 				</a>
-				<a href='/reports' className='hover:text-[var(--color-accent)]'>
-					Reports
-				</a>
 				<a href='/history' className='hover:text-[var(--color-accent)]'>
 					History
 				</a>
