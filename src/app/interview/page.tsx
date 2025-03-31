@@ -8,16 +8,8 @@ import React, { useEffect, useRef, useState } from 'react';
 type Props = {};
 
 const Interview = (props: Props) => {
-	/*
-		AI sends question
-		User responds
-		Repeat until all questions answered
-		Generate and save report
-			For each question, generate score, strengths, improvements
-
-	*/
-
 	const [interviewStarted, setInterviewStarted] = useState(false);
+	const [interviewCompleted, setInterviewCompleted] = useState(false);
 	const [startTime, setStartTime] = useState<Date | null>(null);
 	const [questions, setQuestions] = useState<string[]>([]);
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -29,6 +21,7 @@ const Interview = (props: Props) => {
 	>([]);
 	const [jobDescription, setJobDescription] = useState('');
 	const [interviewId, setInterviewId] = useState('');
+
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
 	const handleStartInterview = async () => {
@@ -60,6 +53,7 @@ const Interview = (props: Props) => {
 				'ai',
 				'Thank you for completing the interview! I will generate feedback for you shortly.'
 			);
+			setInterviewCompleted(true);
 
 			const response = await axios.post('/api/generateReport', {
 				startTime,
@@ -122,7 +116,15 @@ const Interview = (props: Props) => {
 							</a>
 						</>
 					) : (
-						<ResponseBar onSubmitResponse={handleResponseSubmit} />
+						<>
+							{interviewCompleted ? (
+								<div>Generating report...</div>
+							) : (
+								<ResponseBar
+									onSubmitResponse={handleResponseSubmit}
+								/>
+							)}
+						</>
 					)}
 				</div>
 			)}
