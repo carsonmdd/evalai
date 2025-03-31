@@ -18,6 +18,7 @@ const Interview = (props: Props) => {
 	*/
 
 	const [interviewStarted, setInterviewStarted] = useState(false);
+	const [startTime, setStartTime] = useState<Date | null>(null);
 	const [interviewEnded, setInterviewEnded] = useState(false);
 	const [questions, setQuestions] = useState<string[]>([]);
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -38,6 +39,7 @@ const Interview = (props: Props) => {
 		setQuestions(response.data.questions);
 		sendMessage('ai', response.data.questions[0]);
 		setInterviewStarted(true);
+		setStartTime(new Date());
 	};
 
 	const handleResponseSubmit = (response: string) => {
@@ -55,6 +57,8 @@ const Interview = (props: Props) => {
 		} else {
 			// Generate report
 			axios.post('/api/generateReport', {
+				startTime,
+				jobDesc: jobDescription,
 				questionResponses: updatedResponses,
 			});
 			sendMessage(

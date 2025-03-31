@@ -22,29 +22,16 @@ model User {
   imageUrl String?
   firstName String?
   lastName String?
-
   email String @unique
 }
 
 model Interview {
   id String @id @default(cuid())
-  createdAt DateTime @default(now())
 
+  startTime DateTime
   jobDesc String
-  score Int
-  
-  reportId String @unique
-  report Report @relation(fields: [reportId], references: [id])
-}
-
-model Report {
-  id String @id @default(cuid())
-  createdAt DateTime @default(now())
-
-  jobDesc String
+  overallScore Float
   questionResponses QuestionResponse[]
-
-  interview Interview?
 }
 
 model QuestionResponse {
@@ -56,6 +43,6 @@ model QuestionResponse {
   strengths String
   improv String
 
-  reportId String
-  report Report @relation(fields: [reportId], references: [id])
+  interviewId String
+  interview Interview @relation(fields: [interviewId], references: [id])
 }

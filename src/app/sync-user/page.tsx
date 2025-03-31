@@ -1,4 +1,4 @@
-import { getUser, insertUser } from '@/lib/queries';
+import { getUser, createUser } from '@/lib/queries';
 import { auth, clerkClient } from '@clerk/nextjs/server';
 import { notFound, redirect } from 'next/navigation';
 
@@ -19,7 +19,7 @@ const SyncUser = async () => {
 		return redirect('/interview');
 	}
 
-	await insertUser({
+	await createUser({
 		id: userId,
 		imageUrl: user.imageUrl,
 		firstName: user.firstName,

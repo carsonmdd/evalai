@@ -1,7 +1,7 @@
-import { User } from '@prisma/client';
+import { Interview, QuestionResponse, User } from '@prisma/client';
 import prisma from './prisma';
 
-export const insertUser = async (
+export const createUser = async (
 	userData: Omit<User, 'createdAt' | 'updatedAt'>
 ) => {
 	try {
@@ -11,7 +11,7 @@ export const insertUser = async (
 		return user;
 	} catch (e) {
 		console.error(e);
-		throw new Error('Failed to insert user');
+		throw new Error('Failed to create user');
 	}
 };
 
@@ -25,7 +25,7 @@ export const getUser = async (userId: string) => {
 		return user;
 	} catch (e) {
 		console.error(e);
-		throw new Error('Failed to search for user');
+		throw new Error('Failed to fetch user');
 	}
 };
 
@@ -36,5 +36,28 @@ export const getAllUsers = async () => {
 	} catch (e) {
 		console.error(e);
 		throw new Error('Failed to fetch users');
+	}
+};
+
+export const createInterview = async ({
+	interviewData,
+	questionResponses,
+}: {
+	interviewData: Omit<Interview, 'id'>;
+	questionResponses: Omit<QuestionResponse, 'id' | 'interviewId'>[];
+}) => {
+	try {
+		const report = await prisma.interview.create({
+			data: {
+				...interviewData,
+				questionResponses: {
+					create: questionResponses,
+				},
+			},
+		});
+		return report;
+	} catch (e) {
+		console.error(e);
+		throw new Error('Failed to create report');
 	}
 };

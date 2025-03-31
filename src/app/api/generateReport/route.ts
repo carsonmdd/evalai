@@ -1,6 +1,6 @@
+import { createInterview } from '@/lib/queries';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { generateObject } from 'ai';
-import { format } from 'path';
 import { z } from 'zod';
 
 const google = createGoogleGenerativeAI({
@@ -13,26 +13,11 @@ type QuestionResponse = {
 };
 
 export async function POST(request: Request) {
-	/*
-	For each question/answer, need to generate:
-		- Score 1-10
-		- Strengths comment
-		- Areas for improvement comment
+	// const { startTime, jobDesc, questionResponses } = await request.json();
 
-	[
-		{
-			"question": "Tell me about yourself.",
-			"response": "I have a background in software engineering...",
-			"score": 8,
-			"strengths": "Clear and confident response, relevant experience mentioned.",
-			"areasForImprovement": "Could add a more personal touch to make it engaging."
-		},
-	]
-	*/
-
-	// const { questionResponses } = await request.json();
-
-	// For testing purposes, let's use a hardcoded set of question responses
+	// For testing:
+	const startTime = new Date();
+	const jobDesc = 'Software engineer intern';
 	const questionResponses: QuestionResponse[] = [
 		{
 			question:
@@ -101,7 +86,7 @@ export async function POST(request: Request) {
 					"questionNumber": <number>,
 					"score": <number between 1 and 10>,
 					"strengths": "...",
-					"areasForImprovement": "..."	
+					"areasForImprovement": "..."
 				}
 			]
 		`,
@@ -114,21 +99,37 @@ export async function POST(request: Request) {
 	);
 
 	const reportQrs = questionResponses.map(
-		(qr: QuestionResponse, index: number) => ({
-			...qr,
-			...object.find((o) => o.questionNumber === index + 1),
-		})
+		(qr: QuestionResponse, index: number) => {
+			const match = object.find((o) => o.questionNumber === index + 1);
+			if (!match) {
+				return {
+					question: qr.question,
+					response: qr.response,
+					score: 0,
+					strengths: 'No evaluation provided.',
+					improv: 'No evaluation provided.',
+				};
+			}
+
+			return {
+				...qr,
+				score: match.score,
+				strengths: match.strengths,
+				improv: match.areasForImprovement,
+			};
+		}
 	);
 
-	const finalReport = {
-		overallScore,
-		feedback: reportQrs,
-	};
+	await createInterview({
+		interviewData: {
+			startTime,
+			jobDesc,
+			overallScore,
+		},
+		questionResponses: reportQrs,
+	});
 
-	console.log('Final Report:', finalReport);
-
-	return new Response(JSON.stringify(finalReport), {
-		status: 200,
-		headers: { 'Content-Type': 'application/json' },
+	return new Response(null, {
+		status: 204,
 	});
 }
