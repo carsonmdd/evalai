@@ -69,6 +69,7 @@ export const getInterview = async (interviewId: string) => {
 		if (!userId) {
 			throw new Error('User not logged in');
 		}
+
 		const interview = await prisma.interview.findFirst({
 			where: {
 				id: interviewId,
@@ -91,6 +92,7 @@ export const getUserInterviews = async () => {
 		if (!userId) {
 			throw new Error('User not logged in');
 		}
+
 		const interviews = await prisma.interview.findMany({
 			where: {
 				userId: userId,
@@ -100,5 +102,24 @@ export const getUserInterviews = async () => {
 	} catch (e) {
 		console.error(e);
 		throw new Error('Failed to fetch user interviews');
+	}
+};
+
+export const deleteInterview = async (interviewId: string) => {
+	try {
+		const { userId } = await auth();
+		if (!userId) {
+			throw new Error('User not logged in');
+		}
+
+		await prisma.interview.delete({
+			where: {
+				userId,
+				id: interviewId,
+			},
+		});
+	} catch (e) {
+		console.error(e);
+		throw new Error('Failed to delete interview');
 	}
 };

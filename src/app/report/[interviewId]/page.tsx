@@ -38,12 +38,14 @@ const Reports = async (props: Props) => {
 							</span>
 							{`${interview.overallScore}/10`}
 						</p>
-						<p>
+						<div>
 							<span className='text-[var(--color-accent)] font-bold'>
 								Job Description:{' '}
 							</span>
-							{interview.jobDesc}
-						</p>
+							<div className='max-w-[40rem] max-h-[10lh] overflow-y-auto'>
+								{interview.jobDesc}
+							</div>
+						</div>
 					</div>
 					<hr className='my-8 w-[700px]' />
 					{interview.questionResponses.map((qr, index) => (

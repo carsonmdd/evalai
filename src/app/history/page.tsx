@@ -24,9 +24,18 @@ const History = () => {
 		fetchInterviews();
 	}, []);
 
-	const onDelete = (id: string) => {
-		// Handle delete action
-		console.log(`Delete report with id: ${id}`);
+	const onDelete = async (id: string) => {
+		try {
+			await axios.delete('/api/deleteInterview', {
+				data: { interviewId: id },
+			});
+
+			setInterviews((prevInterviews) =>
+				prevInterviews.filter((interview) => interview.id !== id)
+			);
+		} catch (e) {
+			console.error('Failed to delete interview', e);
+		}
 	};
 
 	const formatTime = (time: Date) => {

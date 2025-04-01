@@ -49,5 +49,5 @@ model QuestionResponse {
   improv String
 
   interviewId String
-  interview Interview @relation(fields: [interviewId], references: [id])
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
 }
