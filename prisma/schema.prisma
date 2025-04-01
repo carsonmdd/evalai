@@ -23,6 +23,8 @@ model User {
   firstName String?
   lastName String?
   email String @unique
+
+  interviews Interview[]
 }
 
 model Interview {
@@ -32,6 +34,9 @@ model Interview {
   jobDesc String
   overallScore Float
   questionResponses QuestionResponse[]
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
 }
 
 model QuestionResponse {

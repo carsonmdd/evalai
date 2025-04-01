@@ -1,5 +1,6 @@
 import { createInterview } from '@/lib/queries';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { auth } from '@clerk/nextjs/server';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 
@@ -120,11 +121,17 @@ export async function POST(request: Request) {
 		}
 	);
 
+	const { userId } = await auth();
+	if (!userId) {
+		return new Response('Unauthorized', { status: 401 });
+	}
+
 	const interview = await createInterview({
 		interviewData: {
 			startTime,
 			jobDesc,
 			overallScore,
+			userId,
 		},
 		questionResponses: reportQrs,
 	});

@@ -1,5 +1,6 @@
 import { Interview, QuestionResponse, User } from '@prisma/client';
-import prisma from './prisma';
+import { prisma } from './prisma';
+import { auth } from '@clerk/nextjs/server';
 
 export const createUser = async (
 	userData: Omit<User, 'createdAt' | 'updatedAt'>
@@ -64,9 +65,14 @@ export const createInterview = async ({
 
 export const getInterview = async (interviewId: string) => {
 	try {
-		const interview = await prisma.interview.findUnique({
+		const { userId } = await auth();
+		if (!userId) {
+			throw new Error('User not logged in');
+		}
+		const interview = await prisma.interview.findFirst({
 			where: {
 				id: interviewId,
+				userId: userId,
 			},
 			include: {
 				questionResponses: true,
@@ -76,5 +82,23 @@ export const getInterview = async (interviewId: string) => {
 	} catch (e) {
 		console.error(e);
 		throw new Error('Failed to fetch interview');
+	}
+};
+
+export const getUserInterviews = async () => {
+	try {
+		const { userId } = await auth();
+		if (!userId) {
+			throw new Error('User not logged in');
+		}
+		const interviews = await prisma.interview.findMany({
+			where: {
+				userId: userId,
+			},
+		});
+		return interviews;
+	} catch (e) {
+		console.error(e);
+		throw new Error('Failed to fetch user interviews');
 	}
 };

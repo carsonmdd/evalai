@@ -8,7 +8,9 @@ type Props = {
 
 const Reports = async (props: Props) => {
 	const { interviewId } = await props.params;
+
 	const interview = await getInterview(interviewId);
+
 	const formattedTime = interview?.startTime.toLocaleString('en-US', {
 		month: 'long',
 		day: 'numeric',
