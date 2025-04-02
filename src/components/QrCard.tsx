@@ -19,7 +19,7 @@ const QrCard = ({
 }: Props) => {
 	return (
 		<div
-			className={`border-2 border-[var(--color-light-purple)] rounded-xl p-6 w-[50rem] flex flex-col text-lg ${classes}`}
+			className={`hover:scale-101 transition-transform duration-200 border-2 border-[var(--color-light-purple)] rounded-xl p-6 w-[50rem] flex flex-col text-lg ${classes}`}
 		>
 			<div className='space-y-2'>
 				<p>

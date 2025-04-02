@@ -35,7 +35,7 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 			></textarea>
 			<button
 				onClick={() => handleSendResponse()}
-				className='hover:bg-[#606060] cursor-pointer border-2 border-[var(--color-accent)] w-8 h-8 rounded-xl'
+				className='hover:bg-[#606060] transition-colors duration-200 cursor-pointer border-2 border-[var(--color-accent)] w-8 h-8 rounded-xl'
 			>
 				<FontAwesomeIcon icon={faArrowUp} size='lg' />
 			</button>

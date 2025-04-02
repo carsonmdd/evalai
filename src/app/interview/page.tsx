@@ -113,7 +113,7 @@ const Interview = () => {
 					<button
 						onClick={handleStartInterview}
 						disabled={generatingQuestions}
-						className='cursor-pointer bg-[var(--color-accent)] hover:bg-[var(--color-light-purple)] rounded text-2xl px-4 py-1'
+						className='cursor-pointer bg-[var(--color-accent)] hover:bg-[var(--color-light-purple)] transition-colors duration-200 rounded text-2xl px-4 py-1'
 					>
 						Begin Interview
 					</button>
@@ -141,7 +141,7 @@ const Interview = () => {
 						<>
 							<a
 								href={`/report/${interviewId}`}
-								className='cursor-pointer text-[var(--color-accent)] text-xl'
+								className='cursor-pointer text-[var(--color-accent)] text-xl hover:text-[var(--color-light-purple)] transition-colors duration-200'
 							>
 								View report
 							</a>

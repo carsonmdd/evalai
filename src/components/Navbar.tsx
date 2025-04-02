@@ -17,7 +17,7 @@ const Navbar = () => {
 				/>
 				<a
 					href='/'
-					className={`${
+					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
 						pathname === '/' ? 'text-[var(--color-accent)]' : ''
 					}`}
 				>
@@ -28,7 +28,7 @@ const Navbar = () => {
 			<div className='space-x-10 flex items-center justify-center'>
 				<a
 					href='/interview'
-					className={`${
+					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
 						pathname === '/interview'
 							? 'text-[var(--color-accent)]'
 							: ''
@@ -38,7 +38,7 @@ const Navbar = () => {
 				</a>
 				<a
 					href='/history'
-					className={`${
+					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
 						pathname === '/history'
 							? 'text-[var(--color-accent)]'
 							: ''
