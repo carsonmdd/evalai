@@ -97,14 +97,18 @@ Submitting an application
 
 To ensure a streamlined and fair hiring process for all candidates, our team only reviews applications submitted through our company website. This practice allows us to track, assess, and respond to applicants efficiently. Emailing our employees, recruiters, or Human Resources personnel directly will not influence your application.
 		`);
-		const response = await axios.post('/api/generateQuestions', {
-			jobDescription,
-		});
+		try {
+			const response = await axios.post('/api/generateQuestions', {
+				jobDescription,
+			});
 
-		setQuestions(response.data.questions);
-		sendMessage('ai', response.data.questions[0]);
-		setInterviewStarted(true);
-		setStartTime(new Date());
+			setQuestions(response.data.questions);
+			sendMessage('ai', response.data.questions[0]);
+			setInterviewStarted(true);
+			setStartTime(new Date());
+		} catch (e) {
+			console.error('Failed to generate questions:', e);
+		}
 	};
 
 	const handleResponseSubmit = async (response: string) => {
@@ -127,12 +131,16 @@ To ensure a streamlined and fair hiring process for all candidates, our team onl
 			);
 			setInterviewCompleted(true);
 
-			const response = await axios.post('/api/generateReport', {
-				startTime,
-				jobDesc: jobDescription,
-				questionResponses: updatedResponses,
-			});
-			setInterviewId(response.data.interview.id);
+			try {
+				const response = await axios.post('/api/generateReport', {
+					startTime,
+					jobDesc: jobDescription,
+					questionResponses: updatedResponses,
+				});
+				setInterviewId(response.data.interview.id);
+			} catch (e) {
+				console.error('Failed to generate report:', e);
+			}
 		}
 	};
 

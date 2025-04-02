@@ -8,6 +8,7 @@ export async function DELETE(request: Request) {
 
 		return new Response('Deleted successfully', { status: 200 });
 	} catch (e) {
+		console.error('API error:', e);
 		return new Response('Failed to delete interview', { status: 500 });
 	}
 }

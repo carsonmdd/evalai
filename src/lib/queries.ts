@@ -11,7 +11,7 @@ export const createUser = async (
 		});
 		return user;
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to create user');
 	}
 };
@@ -25,7 +25,7 @@ export const getUser = async (userId: string) => {
 		});
 		return user;
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to fetch user');
 	}
 };
@@ -35,7 +35,7 @@ export const getAllUsers = async () => {
 		const users = await prisma.user.findMany();
 		return users;
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to fetch users');
 	}
 };
@@ -58,7 +58,7 @@ export const createInterview = async ({
 		});
 		return interview;
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to create interview');
 	}
 };
@@ -81,7 +81,7 @@ export const getInterview = async (interviewId: string) => {
 		});
 		return interview;
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to fetch interview');
 	}
 };
@@ -97,10 +97,13 @@ export const getUserInterviews = async () => {
 			where: {
 				userId: userId,
 			},
+			orderBy: {
+				startTime: 'desc',
+			},
 		});
 		return interviews;
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to fetch user interviews');
 	}
 };
@@ -119,7 +122,7 @@ export const deleteInterview = async (interviewId: string) => {
 			},
 		});
 	} catch (e) {
-		console.error(e);
+		console.error('Database error:', e);
 		throw new Error('Failed to delete interview');
 	}
 };

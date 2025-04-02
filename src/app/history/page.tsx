@@ -1,28 +1,31 @@
 'use client';
 
+import CustomSignInButton from '@/components/CustomSignInButton';
+import { SignInButton, useUser } from '@clerk/nextjs';
 import { Interview } from '@prisma/client';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const History = () => {
+	const { isSignedIn, isLoaded } = useUser();
 	const [interviews, setInterviews] = useState<Interview[]>([]);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
+		if (!isSignedIn) return;
+
 		const fetchInterviews = async () => {
 			try {
 				const res = await axios.get('/api/getInterviews');
 				setInterviews(res.data.interviews);
+				setError('');
 			} catch (e) {
-				return (
-					<div className='text-red-500'>
-						Failed to fetch interviews
-					</div>
-				);
+				setError('Failed to fetch interviews');
 			}
 		};
 
 		fetchInterviews();
-	}, []);
+	}, [isSignedIn]);
 
 	const onDelete = async (id: string) => {
 		try {
@@ -48,6 +51,27 @@ const History = () => {
 			hour12: true,
 		});
 	};
+
+	if (!isLoaded) {
+		return (
+			<div className='flex items-center justify-center text-xl'>
+				Loading...
+			</div>
+		);
+	} else if (!isSignedIn) {
+		return (
+			<div className='flex flex-col items-center justify-center gap-3 text-xl'>
+				Sign in to view your interviews.
+				<CustomSignInButton />
+			</div>
+		);
+	} else if (error) {
+		return (
+			<div className='flex items-center justify-center text-red-500'>
+				{error}
+			</div>
+		);
+	}
 
 	return (
 		<div className='mx-5'>

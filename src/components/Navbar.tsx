@@ -1,19 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import {
-	SignInButton,
-	SignedIn,
-	SignedOut,
-	UserButton,
-	useAuth,
-} from '@clerk/nextjs';
+import { SignedOut, UserButton, useAuth } from '@clerk/nextjs';
 import { usePathname } from 'next/navigation';
+import CustomSignInButton from './CustomSignInButton';
 
-type Props = {};
-
-const Navbar = (props: Props) => {
-	const { isLoaded, isSignedIn } = useAuth();
+const Navbar = () => {
+	const { isLoaded } = useAuth();
 	const pathname = usePathname();
 
 	return (
@@ -22,7 +14,7 @@ const Navbar = (props: Props) => {
 				<a href='/'>EvalAI</a>
 			</div>
 
-			<div className='space-x-10 flex'>
+			<div className='space-x-10 flex items-center justify-center'>
 				<a
 					href='/interview'
 					className={`${
@@ -44,7 +36,7 @@ const Navbar = (props: Props) => {
 					History
 				</a>
 				<SignedOut>
-					<SignInButton />
+					<CustomSignInButton />
 				</SignedOut>
 				{isLoaded ? (
 					<UserButton />
