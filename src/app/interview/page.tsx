@@ -15,6 +15,7 @@ const Interview = () => {
 	const [questionResponses, setQuestionResponses] = useState<
 		{ question: string; response: string }[]
 	>([]);
+	const [generatingQuestions, setGeneratingQuestions] = useState(false);
 
 	const [messages, setMessages] = useState<
 		{ sender: string; text: string }[]
@@ -27,6 +28,7 @@ const Interview = () => {
 
 	const handleStartInterview = async () => {
 		try {
+			setGeneratingQuestions(true);
 			const response = await axios.post('/api/generateQuestions', {
 				jobDescription,
 			});
@@ -35,6 +37,7 @@ const Interview = () => {
 			sendMessage('ai', response.data.questions[0]);
 			setInterviewStarted(true);
 			setStartTime(new Date());
+			setGeneratingQuestions(false);
 		} catch (e) {
 			console.error('Failed to generate questions:', e);
 		}
@@ -100,7 +103,7 @@ const Interview = () => {
 	return (
 		<>
 			{!interviewStarted ? (
-				<div className='grow flex flex-col items-center justify-center mt-[3rem]'>
+				<div className='grow flex flex-col items-center justify-center'>
 					<h1 className='font-bold text-3xl mb-6'>Job Description</h1>
 					<textarea
 						className='bg-[var(--color-light-gray)] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
@@ -109,6 +112,7 @@ const Interview = () => {
 					></textarea>
 					<button
 						onClick={handleStartInterview}
+						disabled={generatingQuestions}
 						className='cursor-pointer bg-[var(--color-accent)] hover:bg-[var(--color-light-purple)] rounded text-2xl px-4 py-1'
 					>
 						Begin Interview

@@ -13,7 +13,7 @@ const Reports = async (props: Props) => {
 
 		if (!interview) {
 			return (
-				<div className='grow flex flex-col items-center justify-center'>
+				<div className='flex grow flex-col items-center justify-center'>
 					<p className='text-red-500'>Failed to load interview</p>
 				</div>
 			);
@@ -29,7 +29,7 @@ const Reports = async (props: Props) => {
 		});
 
 		return (
-			<div className='grow flex flex-col items-center justify-center text-xl'>
+			<div className='flex grow flex-col items-center justify-center text-xl p-[4rem]'>
 				<div>
 					<h1 className='text-2xl font-bold mb-8 justify-self-center'>
 						{`Interview Report for ${formattedTime}`}
@@ -58,14 +58,14 @@ const Reports = async (props: Props) => {
 						score={qr.score}
 						strengths={qr.strengths}
 						improv={qr.improv}
-						classes='mb-4'
+						classes='mb-6'
 					/>
 				))}
 			</div>
 		);
 	} catch (e) {
 		console.error('Error fetching interview:', e);
-		<div className='grow flex flex-col items-center justify-center'>
+		<div className='flex grow flex-col items-center justify-center'>
 			<p className='text-red-500'>Failed to load interview</p>
 		</div>;
 	}

@@ -53,20 +53,20 @@ const History = () => {
 
 	if (loading) {
 		return (
-			<div className='flex items-center justify-center text-xl'>
+			<div className='flex grow items-center justify-center text-xl'>
 				Loading...
 			</div>
 		);
 	} else if (error) {
 		return (
-			<div className='flex items-center justify-center text-red-500'>
+			<div className='flex grow items-center justify-center text-red-500'>
 				{error}
 			</div>
 		);
 	}
 
 	return (
-		<div className='mx-5 flex items-center justify-center'>
+		<div className='flex grow items-start justify-center p-[4rem]'>
 			<table className='min-w-[50rem]'>
 				<thead>
 					<tr className='bg-light-gray'>

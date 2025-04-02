@@ -15,7 +15,14 @@ const Navbar = () => {
 					alt='AI avatar'
 					className='w-10 h-10 rounded-full'
 				/>
-				<a href='/'>EvalAI</a>
+				<a
+					href='/'
+					className={`${
+						pathname === '/' ? 'text-[var(--color-accent)]' : ''
+					}`}
+				>
+					EvalAI
+				</a>
 			</div>
 
 			<div className='space-x-10 flex items-center justify-center'>
