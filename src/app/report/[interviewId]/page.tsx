@@ -31,7 +31,7 @@ const Reports = async (props: Props) => {
 		return (
 			<div className='grow flex flex-col items-center justify-center text-xl'>
 				<div>
-					<h1 className='text-2xl font-bold mb-4'>
+					<h1 className='text-2xl font-bold mb-8 justify-self-center'>
 						{`Interview Report for ${formattedTime}`}
 					</h1>
 					<p>
@@ -44,7 +44,7 @@ const Reports = async (props: Props) => {
 						<span className='text-[var(--color-accent)] font-bold'>
 							Job Description:{' '}
 						</span>
-						<div className='max-w-[40rem] max-h-[10lh] overflow-y-auto'>
+						<div className='max-w-[50rem] max-h-[10lh] overflow-y-auto'>
 							{interview.jobDesc}
 						</div>
 					</div>

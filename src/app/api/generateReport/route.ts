@@ -93,7 +93,7 @@ export async function POST(request: Request) {
 
 		const { userId } = await auth();
 		if (!userId) {
-			return new Response('Unauthorized', { status: 401 });
+			return new Response('User not found', { status: 401 });
 		}
 
 		const interview = await createInterview({

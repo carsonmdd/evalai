@@ -28,12 +28,14 @@ const QrCard = ({
 					</span>
 					{question}
 				</p>
-				<p>
+				<div>
 					<span className='text-[var(--color-accent)] font-bold'>
 						Response:{' '}
 					</span>
-					{response}
-				</p>
+					<div className='max-h-[20rem] overflow-y-auto'>
+						{response}
+					</div>
+				</div>
 			</div>
 			<hr className='my-6 w-11/12 self-center' />
 			<div className='space-y-2'>

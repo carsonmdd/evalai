@@ -1,8 +1,7 @@
 'use client';
 
-import { SignedOut, UserButton, useAuth } from '@clerk/nextjs';
+import { UserButton, useAuth } from '@clerk/nextjs';
 import { usePathname } from 'next/navigation';
-import CustomSignInButton from './CustomSignInButton';
 
 const Navbar = () => {
 	const { isLoaded } = useAuth();
@@ -35,9 +34,6 @@ const Navbar = () => {
 				>
 					History
 				</a>
-				<SignedOut>
-					<CustomSignInButton />
-				</SignedOut>
 				{isLoaded ? (
 					<UserButton />
 				) : (
