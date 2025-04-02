@@ -74,7 +74,7 @@ const History = () => {
 	}
 
 	return (
-		<div className='mx-5'>
+		<div className='mx-5 flex items-center justify-center'>
 			<table className='min-w-[50rem]'>
 				<thead>
 					<tr className='bg-light-gray'>
@@ -88,7 +88,7 @@ const History = () => {
 					{interviews.map((interview) => (
 						<tr key={interview.id} className='text-center border'>
 							<td className='p-2 border text-start'>
-								<div className='max-h-[6rem] max-w-[30rem] overflow-y-auto'>
+								<div className='max-h-[10rem] max-w-[40rem] overflow-y-auto'>
 									{interview.jobDesc}
 								</div>
 							</td>
