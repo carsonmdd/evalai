@@ -2,6 +2,7 @@
 
 import { Interview } from '@prisma/client';
 import axios from 'axios';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const History = () => {
@@ -17,6 +18,7 @@ const History = () => {
 				setInterviews(res.data.interviews);
 				setError('');
 			} catch (e) {
+				console.error(e);
 				setError('Failed to fetch interviews');
 			} finally {
 				setLoading(false);
@@ -95,12 +97,12 @@ const History = () => {
 									</td>
 									<td className='p-2 border space-x-2'>
 										<div className='flex flex-col items-center justify-center gap-2'>
-											<a
+											<Link
 												href={`/report/${interview.id}`}
 												className='px-3 py-1 border-2 border-[var(--color-accent)] rounded hover:bg-[var(--color-light-gray)] transition-colors duration-200'
 											>
 												View Report
-											</a>
+											</Link>
 											<button
 												onClick={() =>
 													onDelete(interview.id)

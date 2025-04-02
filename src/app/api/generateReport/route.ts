@@ -110,7 +110,8 @@ export async function POST(request: Request) {
 			status: 200,
 			headers: { 'Content-Type': 'application/json' },
 		});
-	} catch (error) {
+	} catch (e) {
+		console.error(e);
 		return new Response('Failed to generate report', { status: 500 });
 	}
 }

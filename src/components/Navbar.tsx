@@ -1,6 +1,8 @@
 'use client';
 
 import { UserButton, useAuth } from '@clerk/nextjs';
+import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
@@ -10,23 +12,25 @@ const Navbar = () => {
 	return (
 		<nav className='fixed z-10 w-full flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[var(--color-light-gray)]'>
 			<div className='flex items-center justify-center gap-3'>
-				<img
+				<Image
 					src='/ai-avatar.png'
+					width={40}
+					height={40}
 					alt='AI avatar'
-					className='w-10 h-10 rounded-full'
+					className='rounded-full'
 				/>
-				<a
+				<Link
 					href='/'
 					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
 						pathname === '/' ? 'text-[var(--color-accent)]' : ''
 					}`}
 				>
 					EvalAI
-				</a>
+				</Link>
 			</div>
 
 			<div className='space-x-10 flex items-center justify-center'>
-				<a
+				<Link
 					href='/interview'
 					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
 						pathname === '/interview'
@@ -35,8 +39,8 @@ const Navbar = () => {
 					}`}
 				>
 					Interview
-				</a>
-				<a
+				</Link>
+				<Link
 					href='/history'
 					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
 						pathname === '/history'
@@ -45,7 +49,7 @@ const Navbar = () => {
 					}`}
 				>
 					History
-				</a>
+				</Link>
 				{isLoaded ? (
 					<UserButton />
 				) : (

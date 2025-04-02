@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 
@@ -14,10 +15,12 @@ const Message = ({ sender, text, image }: Props) => {
 				sender === 'ai' ? 'self-start' : 'self-end flex-row-reverse'
 			}`}
 		>
-			<img
+			<Image
 				src={image}
+				width={40}
+				height={40}
 				alt={`${sender} avatar`}
-				className='w-10 h-10 rounded-full'
+				className='rounded-full'
 			/>
 			<div
 				className={`max-w-[40rem] rounded-xl p-3 ${

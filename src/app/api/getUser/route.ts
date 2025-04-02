@@ -8,7 +8,8 @@ export async function GET() {
 			status: 200,
 			headers: { 'Content-Type': 'application/json' },
 		});
-	} catch (error) {
+	} catch (e) {
+		console.error(e);
 		return new Response('Failed to get user', { status: 500 });
 	}
 }

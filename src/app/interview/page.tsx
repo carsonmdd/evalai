@@ -3,6 +3,7 @@
 import Message from '@/components/Message';
 import ResponseBar from '@/components/ResponseBar';
 import axios from 'axios';
+import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
 const Interview = () => {
@@ -139,12 +140,12 @@ const Interview = () => {
 					</div>
 					{interviewId ? (
 						<>
-							<a
+							<Link
 								href={`/report/${interviewId}`}
 								className='cursor-pointer text-[var(--color-accent)] text-xl hover:text-[var(--color-light-purple)] transition-colors duration-200'
 							>
 								View report
-							</a>
+							</Link>
 						</>
 					) : (
 						<>

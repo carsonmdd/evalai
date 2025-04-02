@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const Home = () => {
 	return (
 		<div className='bg-[var(--color-background)] text-[var(--color-foreground)] grow flex flex-col items-center justify-center p-6'>
@@ -13,15 +15,16 @@ const Home = () => {
 			<div className='bg-[var(--color-dark-purple)] text-[var(--color-foreground)] p-8 rounded-xl shadow-lg max-w-[29rem] text-center'>
 				<h2 className='text-3xl font-semibold mb-2'>Get Started</h2>
 				<p className='mb-10 text-xl'>
-					Begin your interview preparation by providing a job
-					description and we'll generate tailored questions for you.
+					{
+						"Begin your interview preparation by providing a job description and we'll generate tailored questions for you."
+					}
 				</p>
-				<a
+				<Link
 					className='cursor-pointer bg-[var(--color-accent)] hover:bg-[var(--color-light-purple)] transition-colors duration-200 text-[var(--color-foreground)] py-2 px-6 rounded-full text-xl'
 					href='/interview'
 				>
 					Start Interview
-				</a>
+				</Link>
 			</div>
 		</div>
 	);
