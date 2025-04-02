@@ -9,7 +9,12 @@ const Navbar = () => {
 
 	return (
 		<nav className='fixed z-10 w-full flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[var(--color-light-gray)]'>
-			<div>
+			<div className='flex items-center justify-center gap-3'>
+				<img
+					src='/ai-avatar.png'
+					alt='AI avatar'
+					className='w-10 h-10 rounded-full'
+				/>
 				<a href='/'>EvalAI</a>
 			</div>
 

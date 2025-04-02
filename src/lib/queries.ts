@@ -16,8 +16,13 @@ export const createUser = async (
 	}
 };
 
-export const getUser = async (userId: string) => {
+export const getUser = async () => {
 	try {
+		const { userId } = await auth();
+		if (!userId) {
+			throw new Error('User not logged in');
+		}
+
 		const user = await prisma.user.findUnique({
 			where: {
 				id: userId,

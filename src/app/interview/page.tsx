@@ -9,16 +9,19 @@ const Interview = () => {
 	const [interviewStarted, setInterviewStarted] = useState(false);
 	const [interviewCompleted, setInterviewCompleted] = useState(false);
 	const [startTime, setStartTime] = useState<Date | null>(null);
+
 	const [questions, setQuestions] = useState<string[]>([]);
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [questionResponses, setQuestionResponses] = useState<
 		{ question: string; response: string }[]
 	>([]);
+
 	const [messages, setMessages] = useState<
 		{ sender: string; text: string }[]
 	>([]);
 	const [jobDescription, setJobDescription] = useState('');
 	const [interviewId, setInterviewId] = useState('');
+	const [userImage, setUserImage] = useState('');
 
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -81,13 +84,26 @@ const Interview = () => {
 		}
 	}, [messages]);
 
+	useEffect(() => {
+		const getUserImage = async () => {
+			try {
+				const res = await axios.get('/api/getUser');
+				setUserImage(res.data.user.imageUrl);
+			} catch (e) {
+				console.error(e);
+			}
+		};
+
+		getUserImage();
+	}, []);
+
 	return (
 		<>
 			{!interviewStarted ? (
 				<div className='grow flex flex-col items-center justify-center mt-[3rem]'>
 					<h1 className='font-bold text-3xl mb-6'>Job Description</h1>
 					<textarea
-						className='bg-[var(--color-light-gray)] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl'
+						className='bg-[var(--color-light-gray)] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
 						placeholder='Paste a job description here'
 						onChange={(e) => setJobDescription(e.target.value)}
 					></textarea>
@@ -102,13 +118,18 @@ const Interview = () => {
 				<div className='grow flex flex-col items-center justify-end pb-20 relative'>
 					<div
 						ref={chatContainerRef}
-						className='w-[52rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md p-3 bg-[#3a3a3a] rounded-lg'
+						className='w-[60rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#3a3a3a] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message
 								key={index}
 								sender={msg.sender}
 								text={msg.text}
+								image={
+									msg.sender === 'ai'
+										? '/ai-avatar.png'
+										: userImage
+								}
 							/>
 						))}
 					</div>
@@ -116,7 +137,7 @@ const Interview = () => {
 						<>
 							<a
 								href={`/report/${interviewId}`}
-								className='cursor-pointer text-[var(--color-accent)]'
+								className='cursor-pointer text-[var(--color-accent)] text-xl'
 							>
 								View report
 							</a>
@@ -124,7 +145,9 @@ const Interview = () => {
 					) : (
 						<>
 							{interviewCompleted ? (
-								<div>Generating report...</div>
+								<div className='text-xl'>
+									Generating report...
+								</div>
 							) : (
 								<ResponseBar
 									onSubmitResponse={handleResponseSubmit}

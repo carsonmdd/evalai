@@ -14,7 +14,7 @@ const SyncUser = async () => {
 	}
 
 	// Check if user already exists in the database
-	const existingUser = await getUser(userId);
+	const existingUser = await getUser();
 	if (existingUser) {
 		return redirect('/interview');
 	}

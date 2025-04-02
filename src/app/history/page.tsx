@@ -1,6 +1,5 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { Interview } from '@prisma/client';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -29,7 +28,6 @@ const History = () => {
 
 	const onDelete = async (id: string) => {
 		try {
-			setLoading(true);
 			await axios.delete('/api/deleteInterview', {
 				data: { interviewId: id },
 			});
@@ -39,8 +37,6 @@ const History = () => {
 			);
 		} catch (e) {
 			console.error('Failed to delete interview', e);
-		} finally {
-			setLoading(false);
 		}
 	};
 
