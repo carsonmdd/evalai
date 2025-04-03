@@ -114,9 +114,14 @@ const Interview = () => {
 					<button
 						onClick={handleStartInterview}
 						disabled={generatingQuestions}
-						className='cursor-pointer bg-[var(--color-accent)] hover:bg-[var(--color-light-purple)] transition-colors duration-200 rounded text-2xl px-4 py-1'
+						className={`bg-[var(--color-accent)] transition-colors duration-200 rounded text-2xl px-4 py-1 ${
+							!generatingQuestions &&
+							'cursor-pointer hover:bg-[var(--color-light-purple)]'
+						}`}
 					>
-						Begin Interview
+						{!generatingQuestions
+							? 'Begin Interview'
+							: 'Creating questions...'}
 					</button>
 				</div>
 			) : (
