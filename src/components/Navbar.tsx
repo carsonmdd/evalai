@@ -23,7 +23,7 @@ const Navbar = () => {
 					alt='AI avatar'
 					className='rounded-full'
 				/>
-				<Link href='/'>EvalAI</Link>
+				<Link href='/home'>EvalAI</Link>
 			</div>
 
 			<div className='space-x-10 flex items-center justify-center'>

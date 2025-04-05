@@ -27,11 +27,8 @@ export default function RootLayout({
 	return (
 		<ClerkProvider>
 			<html lang='en'>
-				<body
-					className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col`}
-				>
-					<Navbar />
-					<div className='mt-[72px] flex flex-grow'>{children}</div>
+				<body className={`${geistSans.variable} ${geistMono.variable}`}>
+					{children}
 				</body>
 			</html>
 		</ClerkProvider>
