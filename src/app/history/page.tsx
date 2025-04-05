@@ -71,7 +71,7 @@ const History = () => {
 				{interviews.length > 0 ? (
 					<table className='min-w-[50rem] self-start'>
 						<thead>
-							<tr className='bg-light-gray'>
+							<tr className='bg-gray-700'>
 								<th className='p-2 border'>Job Description</th>
 								<th className='p-2 border'>Date and Time</th>
 								<th className='p-2 border'>Score</th>
@@ -99,7 +99,7 @@ const History = () => {
 										<div className='flex flex-col items-center justify-center gap-2'>
 											<Link
 												href={`/report/${interview.id}`}
-												className='px-3 py-1 border-2 border-[var(--color-accent)] rounded hover:bg-[var(--color-light-gray)] transition-colors duration-200'
+												className='px-3 py-1 border-2 border-violet-700 rounded hover:bg-[#253038] transition-colors duration-200'
 											>
 												View Report
 											</Link>
@@ -107,7 +107,7 @@ const History = () => {
 												onClick={() =>
 													onDelete(interview.id)
 												}
-												className='px-3 py-1 border-2 border-red-500 rounded cursor-pointer hover:bg-[var(--color-light-gray)] transition-colors duration-200'
+												className='px-3 py-1 border-2 border-red-500 rounded cursor-pointer hover:bg-[#253038] transition-colors duration-200'
 											>
 												Delete
 											</button>

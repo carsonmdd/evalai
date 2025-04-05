@@ -107,16 +107,16 @@ const Interview = () => {
 				<div className='grow flex flex-col items-center justify-center'>
 					<h1 className='font-bold text-3xl mb-6'>Job Description</h1>
 					<textarea
-						className='bg-[var(--color-light-gray)] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
+						className='bg-[#1d262d] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
 						placeholder='Paste a job description here'
 						onChange={(e) => setJobDescription(e.target.value)}
 					></textarea>
 					<button
 						onClick={handleStartInterview}
 						disabled={generatingQuestions}
-						className={`bg-[var(--color-accent)] transition-colors duration-200 rounded text-2xl px-4 py-1 ${
+						className={`bg-violet-700 transition-colors duration-200 rounded text-2xl px-4 py-1 ${
 							!generatingQuestions &&
-							'cursor-pointer hover:bg-[var(--color-light-purple)]'
+							'cursor-pointer hover:bg-violet-600'
 						}`}
 					>
 						{!generatingQuestions
@@ -128,7 +128,7 @@ const Interview = () => {
 				<div className='grow flex flex-col items-center justify-end pb-20 relative'>
 					<div
 						ref={chatContainerRef}
-						className='w-[60rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#3a3a3a] rounded-lg'
+						className='w-[60rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message
@@ -147,7 +147,7 @@ const Interview = () => {
 						<>
 							<Link
 								href={`/report/${interviewId}`}
-								className='cursor-pointer text-[var(--color-accent)] text-xl hover:text-[var(--color-light-purple)] transition-colors duration-200'
+								className='cursor-pointer text-violet-500 text-xl hover:text-violet-400 transition-colors duration-200'
 							>
 								View report
 							</Link>

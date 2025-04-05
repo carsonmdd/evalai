@@ -24,7 +24,7 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 	};
 
 	return (
-		<div className='absolute bottom-6 h-auto gap-3 rounded-lg py-3 px-5 bg-[var(--color-light-gray)] flex items-end justify-between w-[48rem]'>
+		<div className='absolute bottom-6 h-auto gap-3 rounded-lg py-3 px-5 bg-[#1d262d] flex items-end justify-between w-[48rem]'>
 			<textarea
 				className='focus:outline-none min-h-[1lh] max-h-[10lh] w-full field-sizing-content resize-none'
 				placeholder='Type a response here'
@@ -35,7 +35,7 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 			></textarea>
 			<button
 				onClick={() => handleSendResponse()}
-				className='hover:bg-[#606060] transition-colors duration-200 cursor-pointer border-2 border-[var(--color-accent)] w-8 h-8 rounded-xl'
+				className='hover:bg-[#293640] transition-colors duration-200 cursor-pointer border-2 border-violet-500 w-8 h-8 rounded-xl'
 			>
 				<FontAwesomeIcon icon={faArrowUp} size='lg' />
 			</button>

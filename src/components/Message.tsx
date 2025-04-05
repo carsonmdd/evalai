@@ -24,9 +24,7 @@ const Message = ({ sender, text, image }: Props) => {
 			/>
 			<div
 				className={`max-w-[40rem] rounded-xl p-3 ${
-					sender === 'ai'
-						? 'bg-indigo-800'
-						: 'bg-[var(--dark-purple)]'
+					sender === 'ai' ? 'bg-indigo-700' : 'bg-violet-700'
 				}`}
 			>
 				{sender === 'ai' ? (

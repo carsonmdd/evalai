@@ -10,8 +10,12 @@ const Navbar = () => {
 	const pathname = usePathname();
 
 	return (
-		<nav className='fixed z-10 w-full flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[var(--color-light-gray)]'>
-			<div className='flex items-center justify-center gap-3'>
+		<nav className='fixed z-10 w-[98%] self-center mt-4 flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[#1a2228]/90 rounded-full'>
+			<div
+				className={`flex items-center justify-center gap-3 cursor-pointer hover:text-violet-400 transition-colors duration-200 ${
+					pathname === '/' ? 'text-violet-500' : ''
+				}`}
+			>
 				<Image
 					src='/ai-avatar.png'
 					width={40}
@@ -19,33 +23,22 @@ const Navbar = () => {
 					alt='AI avatar'
 					className='rounded-full'
 				/>
-				<Link
-					href='/'
-					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
-						pathname === '/' ? 'text-[var(--color-accent)]' : ''
-					}`}
-				>
-					EvalAI
-				</Link>
+				<Link href='/'>EvalAI</Link>
 			</div>
 
 			<div className='space-x-10 flex items-center justify-center'>
 				<Link
 					href='/interview'
-					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
-						pathname === '/interview'
-							? 'text-[var(--color-accent)]'
-							: ''
+					className={`hover:text-violet-400 transition-colors duration-200 ${
+						pathname === '/interview' ? 'text-violet-500' : ''
 					}`}
 				>
 					Interview
 				</Link>
 				<Link
 					href='/history'
-					className={`hover:text-[var(--color-light-purple)] transition-colors duration-200 ${
-						pathname === '/history'
-							? 'text-[var(--color-accent)]'
-							: ''
+					className={`hover:text-violet-400 transition-colors duration-200 ${
+						pathname === '/history' ? 'text-violet-500' : ''
 					}`}
 				>
 					History

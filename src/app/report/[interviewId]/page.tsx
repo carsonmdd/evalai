@@ -35,13 +35,13 @@ const Reports = async (props: Props) => {
 						{`Interview Report for ${formattedTime}`}
 					</h1>
 					<p>
-						<span className='text-[var(--color-accent)] font-bold'>
+						<span className='text-violet-500 font-bold'>
 							Overall Score:{' '}
 						</span>
 						{`${interview.overallScore}/10`}
 					</p>
 					<div>
-						<span className='text-[var(--color-accent)] font-bold'>
+						<span className='text-violet-500 font-bold'>
 							Job Description:{' '}
 						</span>
 						<div className='max-w-[50rem] max-h-[10lh] overflow-y-auto'>
