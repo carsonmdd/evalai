@@ -1,3 +1,5 @@
+import { getUserInterviews } from '@/lib/queries';
+
 import { createInterview } from '@/lib/queries';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { auth } from '@clerk/nextjs/server';
@@ -12,6 +14,20 @@ type QuestionResponse = {
 	question: string;
 	response: string;
 };
+
+export async function GET() {
+	try {
+		const interviews = await getUserInterviews();
+
+		return new Response(JSON.stringify({ interviews }), {
+			status: 200,
+			headers: { 'Content-Type': 'application/json' },
+		});
+	} catch (e) {
+		console.error(e);
+		return new Response('Failed to get interviews', { status: 500 });
+	}
+}
 
 export async function POST(request: Request) {
 	try {

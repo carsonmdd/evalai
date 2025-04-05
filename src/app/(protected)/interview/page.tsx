@@ -2,6 +2,7 @@
 
 import Message from '@/components/Message';
 import ResponseBar from '@/components/ResponseBar';
+import { auth } from '@clerk/nextjs/server';
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -30,7 +31,7 @@ const Interview = () => {
 	const handleStartInterview = async () => {
 		try {
 			setGeneratingQuestions(true);
-			const response = await axios.post('/api/generateQuestions', {
+			const response = await axios.post('/api/generate-questions', {
 				jobDescription,
 			});
 
@@ -65,7 +66,7 @@ const Interview = () => {
 			setInterviewCompleted(true);
 
 			try {
-				const response = await axios.post('/api/generateReport', {
+				const response = await axios.post('/api/interviews', {
 					startTime,
 					jobDesc: jobDescription,
 					questionResponses: updatedResponses,
@@ -91,7 +92,7 @@ const Interview = () => {
 	useEffect(() => {
 		const getUserImage = async () => {
 			try {
-				const res = await axios.get('/api/getUser');
+				const res = await axios.get('/api/user');
 				setUserImage(res.data.user.imageUrl);
 			} catch (e) {
 				console.error(e);

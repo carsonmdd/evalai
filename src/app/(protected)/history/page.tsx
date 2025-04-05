@@ -14,7 +14,7 @@ const History = () => {
 		const fetchInterviews = async () => {
 			try {
 				setLoading(true);
-				const res = await axios.get('/api/getInterviews');
+				const res = await axios.get('/api/interviews');
 				setInterviews(res.data.interviews);
 				setError('');
 			} catch (e) {
@@ -30,9 +30,7 @@ const History = () => {
 
 	const onDelete = async (id: string) => {
 		try {
-			await axios.delete('/api/deleteInterview', {
-				data: { interviewId: id },
-			});
+			await axios.delete(`/api/interviews/${id}`);
 
 			setInterviews((prevInterviews) =>
 				prevInterviews.filter((interview) => interview.id !== id)

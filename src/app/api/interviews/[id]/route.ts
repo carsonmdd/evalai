@@ -1,10 +1,13 @@
 import { deleteInterview } from '@/lib/queries';
 
-export async function DELETE(request: Request) {
+export async function DELETE(
+	request: Request,
+	{ params }: { params: Promise<{ id: string }> }
+) {
 	try {
-		const { interviewId } = await request.json();
+		const { id } = await params;
 
-		await deleteInterview(interviewId);
+		await deleteInterview(id);
 
 		return new Response('Deleted successfully', { status: 200 });
 	} catch (e) {
