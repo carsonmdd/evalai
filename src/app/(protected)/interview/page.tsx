@@ -2,7 +2,6 @@
 
 import Message from '@/components/Message';
 import ResponseBar from '@/components/ResponseBar';
-import { auth } from '@clerk/nextjs/server';
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
