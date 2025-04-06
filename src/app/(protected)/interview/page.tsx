@@ -105,7 +105,7 @@ const Interview = () => {
 		<>
 			{!interviewStarted ? (
 				<div className='grow flex flex-col items-center justify-center'>
-					<h1 className='font-bold text-3xl mb-6'>Job Description</h1>
+					<h1 className='font-bold text-3xl mt-14 mb-6'>Job Description</h1>
 					<textarea
 						className='bg-[#1d262d] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
 						placeholder='Paste a job description here'
@@ -128,7 +128,7 @@ const Interview = () => {
 				<div className='grow flex flex-col items-center justify-end pb-3 relative'>
 					<div
 						ref={chatContainerRef}
-						className='w-[70rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
+						className='w-[70rem] h-[75vh] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message

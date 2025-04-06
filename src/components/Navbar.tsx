@@ -10,7 +10,7 @@ const Navbar = () => {
 	const pathname = usePathname();
 
 	return (
-		<nav className='fixed z-10 w-[98%] self-center mt-4 flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[#1a2228]/90 rounded-full'>
+		<nav className='fixed z-10 w-[98%] self-center flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[#1a2228]/99 rounded-full'>
 			<div
 				className={`flex items-center justify-center gap-3 cursor-pointer hover:text-violet-400 transition-colors duration-200 ${
 					pathname === '/' ? 'text-violet-500' : ''
