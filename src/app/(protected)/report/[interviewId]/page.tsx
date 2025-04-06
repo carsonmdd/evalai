@@ -1,6 +1,6 @@
+import ClientDatetime from '@/components/ClientDateTime';
 import QrCard from '@/components/QrCard';
 import { getInterview } from '@/lib/queries';
-import { formatTime } from '@/utils/date';
 import React from 'react';
 
 type Props = {
@@ -24,9 +24,8 @@ const Reports = async (props: Props) => {
 			<div className='flex grow flex-col items-center justify-center text-xl p-[4rem]'>
 				<div>
 					<h1 className='text-2xl font-bold mb-8 justify-self-center mt-[4rem]'>
-						{`Interview Report for ${formatTime(
-							interview.startTime
-						)}`}
+						Interview Report for{' '}
+						<ClientDatetime time={interview.startTime} />
 					</h1>
 					<p>
 						<span className='text-violet-500 font-bold'>

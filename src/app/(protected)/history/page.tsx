@@ -1,6 +1,6 @@
 'use client';
 
-import { formatTime } from '@/utils/date';
+import ClientDatetime from '@/components/ClientDateTime';
 import { Interview } from '@prisma/client';
 import axios from 'axios';
 import Link from 'next/link';
@@ -102,7 +102,9 @@ const History = () => {
 										</div>
 									</td>
 									<td className='p-2 border'>
-										{formatTime(interview.startTime)}
+										<ClientDatetime
+											time={interview.startTime}
+										/>
 									</td>
 									<td className='p-2 border'>
 										{interview.overallScore}
