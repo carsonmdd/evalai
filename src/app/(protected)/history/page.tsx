@@ -4,6 +4,7 @@ import { Interview } from '@prisma/client';
 import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 
 const History = () => {
 	const [loading, setLoading] = useState(true);
@@ -35,8 +36,31 @@ const History = () => {
 			setInterviews((prevInterviews) =>
 				prevInterviews.filter((interview) => interview.id !== id)
 			);
+
+			toast.success('Interview deleted successfully', {
+				position: 'bottom-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: false,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+				transition: Bounce,
+			});
 		} catch (e) {
 			console.error('Failed to delete interview', e);
+			toast.error('Failed to delete interview', {
+				position: 'bottom-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: false,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'dark',
+				transition: Bounce,
+			});
 		}
 	};
 
@@ -118,6 +142,19 @@ const History = () => {
 				) : (
 					<div className='text-2xl'>No interviews found</div>
 				)}
+				<ToastContainer
+					position='bottom-right'
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick={false}
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme='dark'
+					transition={Bounce}
+				/>
 			</div>
 		);
 	}
