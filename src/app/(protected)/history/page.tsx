@@ -1,5 +1,6 @@
 'use client';
 
+import { formatTime } from '@/utils/date';
 import { Interview } from '@prisma/client';
 import axios from 'axios';
 import Link from 'next/link';
@@ -62,17 +63,6 @@ const History = () => {
 				transition: Bounce,
 			});
 		}
-	};
-
-	const formatTime = (time: Date) => {
-		return new Date(time).toLocaleString('en-US', {
-			month: 'long',
-			day: 'numeric',
-			year: 'numeric',
-			hour: '2-digit',
-			minute: '2-digit',
-			hour12: true,
-		});
 	};
 
 	if (loading) {
