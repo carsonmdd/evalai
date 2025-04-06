@@ -19,14 +19,17 @@ const Reports = async (props: Props) => {
 			);
 		}
 
-		const formattedTime = interview?.startTime.toLocaleString('en-US', {
-			month: 'long',
-			day: 'numeric',
-			year: 'numeric',
-			hour: '2-digit',
-			minute: '2-digit',
-			hour12: true,
-		});
+		const formattedTime = new Date(interview?.startTime).toLocaleString(
+			'en-US',
+			{
+				month: 'long',
+				day: 'numeric',
+				year: 'numeric',
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: true,
+			}
+		);
 
 		return (
 			<div className='flex grow flex-col items-center justify-center text-xl p-[4rem]'>
