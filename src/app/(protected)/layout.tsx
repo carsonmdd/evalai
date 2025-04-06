@@ -9,7 +9,7 @@ const ProtectedLayout = ({ children }: Props) => {
 	return (
 		<main className='antialiased h-screen flex flex-col'>
 			<Navbar />
-			<div className='mt-[72px] flex flex-grow'>{children}</div>
+			<div className='flex flex-grow'>{children}</div>
 		</main>
 	);
 };

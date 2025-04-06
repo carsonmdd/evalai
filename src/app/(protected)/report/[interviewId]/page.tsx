@@ -31,7 +31,7 @@ const Reports = async (props: Props) => {
 		return (
 			<div className='flex grow flex-col items-center justify-center text-xl p-[4rem]'>
 				<div>
-					<h1 className='text-2xl font-bold mb-8 justify-self-center'>
+					<h1 className='text-2xl font-bold mb-8 justify-self-center mt-[4rem]'>
 						{`Interview Report for ${formattedTime}`}
 					</h1>
 					<p>

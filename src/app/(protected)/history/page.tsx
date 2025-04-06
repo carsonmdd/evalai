@@ -91,7 +91,7 @@ const History = () => {
 		return (
 			<div className='flex grow items-center justify-center p-[4rem]'>
 				{interviews.length > 0 ? (
-					<table className='min-w-[50rem] self-start'>
+					<table className='min-w-[50rem] self-start mt-[4rem]'>
 						<thead>
 							<tr className='bg-gray-700'>
 								<th className='p-2 border'>Job Description</th>

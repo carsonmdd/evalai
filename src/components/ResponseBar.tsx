@@ -24,7 +24,7 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 	};
 
 	return (
-		<div className='absolute bottom-6 h-auto gap-3 rounded-lg py-3 px-5 bg-[#1d262d] flex items-end justify-between w-[48rem]'>
+		<div className='gap-3 rounded-lg py-3 px-5 bg-[#1d262d] flex items-end justify-between w-[55rem]'>
 			<textarea
 				className='focus:outline-none min-h-[1lh] max-h-[10lh] w-full field-sizing-content resize-none'
 				placeholder='Type a response here'

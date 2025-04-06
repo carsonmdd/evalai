@@ -121,14 +121,14 @@ const Interview = () => {
 					>
 						{!generatingQuestions
 							? 'Begin Interview'
-							: 'Creating questions...'}
+							: 'Generating questions...'}
 					</button>
 				</div>
 			) : (
-				<div className='grow flex flex-col items-center justify-end pb-20 relative'>
+				<div className='grow flex flex-col items-center justify-end pb-3 relative'>
 					<div
 						ref={chatContainerRef}
-						className='w-[60rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
+						className='w-[70rem] h-[47rem] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message
@@ -143,28 +143,30 @@ const Interview = () => {
 							/>
 						))}
 					</div>
-					{interviewId ? (
-						<>
-							<Link
-								href={`/report/${interviewId}`}
-								className='cursor-pointer text-violet-500 text-xl hover:text-violet-400 transition-colors duration-200'
-							>
-								View report
-							</Link>
-						</>
-					) : (
-						<>
-							{interviewCompleted ? (
-								<div className='text-xl'>
-									Generating report...
-								</div>
-							) : (
-								<ResponseBar
-									onSubmitResponse={handleResponseSubmit}
-								/>
-							)}
-						</>
-					)}
+					<div className='h-[60px] flex items-center justify-center'>
+						{interviewId ? (
+							<>
+								<Link
+									href={`/report/${interviewId}`}
+									className='cursor-pointer text-violet-500 text-xl hover:text-violet-400 transition-colors duration-200'
+								>
+									View report
+								</Link>
+							</>
+						) : (
+							<>
+								{interviewCompleted ? (
+									<div className='text-xl'>
+										Generating report...
+									</div>
+								) : (
+									<ResponseBar
+										onSubmitResponse={handleResponseSubmit}
+									/>
+								)}
+							</>
+						)}
+					</div>
 				</div>
 			)}
 		</>
