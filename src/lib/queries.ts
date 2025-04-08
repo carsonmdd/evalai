@@ -6,10 +6,13 @@ export const createUser = async (
 	userData: Omit<User, 'createdAt' | 'updatedAt'>
 ) => {
 	try {
-		const user = await prisma.user.create({
-			data: userData,
+		const upsertUser = await prisma.user.upsert({
+			where: { email: userData.email },
+			update: userData,
+			create: userData,
 		});
-		return user;
+
+		return upsertUser;
 	} catch (e) {
 		console.error('Database error:', e);
 		throw new Error('Failed to create user');
@@ -32,6 +35,35 @@ export const getUser = async () => {
 	} catch (e) {
 		console.error('Database error:', e);
 		throw new Error('Failed to fetch user');
+	}
+};
+
+export const updateUser = async (userId: string, userData: Partial<User>) => {
+	try {
+		const user = await prisma.user.update({
+			where: {
+				id: userId,
+			},
+			data: userData,
+		});
+		return user;
+	} catch (e) {
+		console.error('Database error:', e);
+		throw new Error('Failed to update user');
+	}
+};
+
+export const deleteUser = async (userId: string) => {
+	try {
+		const deletedUser = await prisma.user.delete({
+			where: {
+				id: userId,
+			},
+		});
+		return deletedUser;
+	} catch (e) {
+		console.error('Database error:', e);
+		throw new Error('Failed to delete user');
 	}
 };
 

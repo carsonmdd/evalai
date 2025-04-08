@@ -1,7 +1,8 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
-import { createUser } from '@/lib/queries';
+import { createUser, deleteUser, updateUser } from '@/lib/queries';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
 	const SIGNING_SECRET = process.env.SIGNING_SECRET;
@@ -48,20 +49,31 @@ export async function POST(req: Request) {
 		});
 	}
 
-	if (evt.type !== 'user.created') {
+	if (evt.type === 'user.created') {
+		const { id, image_url, first_name, last_name, email_addresses } =
+			payload.data;
+		await createUser({
+			id: id,
+			imageUrl: image_url,
+			firstName: first_name,
+			lastName: last_name,
+			email: email_addresses[0].email_address,
+		});
+	} else if (evt.type === 'user.updated') {
+		const { id, image_url, first_name, last_name, email_addresses } =
+			payload.data;
+		await updateUser(id, {
+			imageUrl: image_url,
+			firstName: first_name,
+			lastName: last_name,
+			email: email_addresses[0].email_address,
+		});
+	} else if (evt.type === 'user.deleted') {
+		const { id } = payload.data;
+		await deleteUser(id);
+	} else {
 		return new Response('Error: Unsupported event type', { status: 400 });
 	}
-
-	const { id, image_url, first_name, last_name, email_addresses } =
-		payload.data;
-
-	await createUser({
-		id: id,
-		imageUrl: image_url,
-		firstName: first_name,
-		lastName: last_name,
-		email: email_addresses[0].email_address,
-	});
 
 	return new Response('Webhook received', { status: 200 });
 }
