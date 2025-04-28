@@ -1,3 +1,4 @@
+import { handleKeyDown } from '@/utils/keyboard';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
@@ -16,13 +17,6 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 		}
 	};
 
-	const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-		if (event.key === 'Enter' && !event.shiftKey) {
-			event.preventDefault();
-			handleSendResponse();
-		}
-	};
-
 	return (
 		<div className='fixed bottom-[1rem] gap-3 rounded-lg py-3 px-5 bg-[#26323b] flex items-end justify-between w-[55rem]'>
 			<textarea
@@ -30,7 +24,7 @@ const ResponseBar = ({ onSubmitResponse }: Props) => {
 				placeholder='Type a response here'
 				rows={5}
 				onChange={(e) => setResponse(e.target.value)}
-				onKeyDown={handleKeyDown}
+				onKeyDown={(e) => handleKeyDown(e, handleSendResponse)}
 				value={response}
 			></textarea>
 			<button

@@ -2,6 +2,7 @@
 
 import Message from '@/components/Message';
 import ResponseBar from '@/components/ResponseBar';
+import { handleKeyDown } from '@/utils/keyboard';
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -105,11 +106,16 @@ const Interview = () => {
 		<>
 			{!interviewStarted ? (
 				<div className='grow flex flex-col items-center justify-center'>
-					<h1 className='font-bold text-3xl mt-14 mb-6'>Job Description</h1>
+					<h1 className='font-bold text-3xl mt-14 mb-6'>
+						Job Description
+					</h1>
 					<textarea
 						className='bg-[#1d262d] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
 						placeholder='Paste a job description here'
 						onChange={(e) => setJobDescription(e.target.value)}
+						onKeyDown={(e) =>
+							handleKeyDown(e, handleStartInterview)
+						}
 					></textarea>
 					<button
 						onClick={handleStartInterview}
