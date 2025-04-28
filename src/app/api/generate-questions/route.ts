@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 					"Describe a situation where you had to learn a new technology quickly to complete a project. How did you approach the learning process?",
 					"Can you share an experience where you had to optimize the performance of a web application? What techniques did you use to improve its speed and responsiveness?"
 				]
-				Job: "Data Scientist - Machine learning"
+				Job: "Data Scientist - Machine Learning"
 				Questions: [
 					"Can you describe a time when you had to build a machine learning model from scratch? What steps did you take to ensure its accuracy and reliability?",
 					"How do you approach feature engineering when working with complex datasets? Can you provide an example of a successful feature engineering project?",

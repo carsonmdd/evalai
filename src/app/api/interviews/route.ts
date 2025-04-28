@@ -53,18 +53,43 @@ export async function POST(request: Request) {
 				})
 			),
 			prompt: `
-			You are an experienced interviewer providing feedback to a candidate based on their responses to interview questions.
+			You are an experienced interviewer providing honest and insightful feedback to a candidate based on their responses to interview questions.
 			For each question-answer pair provided, generate the following:
-			- The question number (e.g., 1 for Q1, 2 for Q2, etc.)
-			- Overall score (1-10) based on the quality of their response. Feel free to give very low or very high scores for extremely poor or exceptional responses respectively.
+			- The question number (e.g., 1 for Q1, 2 for Q2, etc.).
+			- Overall score (1-10) based on the relevance, depth of knowledge, and communication clarity of the response. You may give very low or very high scores for extremely poor or exceptional responses respectively.
 			- Strengths comment highlighting the positive aspects of their response. If the response lacks any strengths, you may write "None".
 			- Areas for improvement comment suggesting how their response could be enhanced.
 
-			Here are the question-answer pairs:
+			Examples of good feedback:
+			1. Question: "Can you describe a time when you had to debug a complex issue in a web application? What steps did you take to identify and resolve the problem?"
+			Response: "I once had to debug a complex issue in a web application where the page was loading slowly. I used Chrome DevTools to identify the bottleneck and found that a third-party script was causing the delay. I reached out to the vendor, and they provided a fix that improved the performance significantly."
+			Feedback: {
+				"questionNumber": 1,
+				"score": 6,	
+				"strengths": "The candidate shows practical knowledge by using Chrome DevTools effectively to isolate performance issues and demonstrates good communication skills by coordinating with a third-party vendor.",
+				"areasForImprovement": "The response could be stronger by including more detail on the debugging steps taken, alternative troubleshooting considered, or any interim solutions implemented before reaching out to the vendor."
+			}
+			2. Question: "How do you prioritize your tasks when working on multiple projects with tight deadlines?"
+			Response: "I use a priority matrix to categorize tasks based on urgency and importance. I focus on high-impact tasks first and delegate where possible. I also communicate with my team to ensure alignment on priorities."
+			Feedback: {
+				"questionNumber": 2,
+				"score": 8,
+				"strengths": "The candidate shows a structured and strategic approach to prioritization, demonstrating both personal initiative and strong team communication.",
+				"areasForImprovement": "The response could be even stronger by providing more detail and a brief real-world example of when this method helped successfully manage competing deadlines."
+			}
+			3. Question: "Tell me about a time when you had to quickly learn a new technology to complete a project."
+			Response: "I had to learn a new tool once. It worked out fine."
+			Feedback: {
+				"questionNumber": 3,
+				"score": 2,
+				"strengths": "The response briefly acknowledges adaptability by mentioning learning a new tool.",
+				"areasForImprovement": "The response lacks detail, specific examples, and depth; elaborating on what the tool was, how it was learned, and the impact on the project would make the answer much stronger."
+			}
 
+			Now, given the following question-answer pairs, provide feedback for each question:
 			${formattedQuestions}
 
-			Return the results in the following JSON format where :
+			Return the results in the following JSON format:
 			[
 				{
 					"questionNumber": <number>,
