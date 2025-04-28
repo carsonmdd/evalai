@@ -85,6 +85,14 @@ export async function POST(request: Request) {
 				"strengths": "The response briefly acknowledges adaptability by mentioning learning a new tool.",
 				"areasForImprovement": "The response lacks detail, specific examples, and depth; elaborating on what the tool was, how it was learned, and the impact on the project would make the answer much stronger."
 			}
+			4. Question: "Describe a situation where you had to work with a difficult team member. How did you handle it?"
+			Response: "d"
+			Feedback: {
+				questionNumber: 4,
+				score: 1,
+				strengths: "None",
+				areasForImprovement: "The response is too brief and lacks any meaningful content. It should include a specific example of a difficult team member, the actions taken to address the situation, and the outcome."
+			}
 
 			Now, given the following question-answer pairs, provide feedback for each question:
 			${formattedQuestions}
