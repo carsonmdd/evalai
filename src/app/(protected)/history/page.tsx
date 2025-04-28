@@ -40,12 +40,9 @@ const History = () => {
 
 			toast.success('Interview deleted successfully', {
 				position: 'bottom-right',
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: false,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
+				autoClose: 3000,
+				pauseOnHover: false,
+				draggable: false,
 				theme: 'dark',
 				transition: Bounce,
 			});
@@ -53,12 +50,9 @@ const History = () => {
 			console.error('Failed to delete interview', e);
 			toast.error('Failed to delete interview', {
 				position: 'bottom-right',
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: false,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
+				autoClose: 3000,
+				pauseOnHover: false,
+				draggable: false,
 				theme: 'dark',
 				transition: Bounce,
 			});
