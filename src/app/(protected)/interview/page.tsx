@@ -121,8 +121,9 @@ const Interview = () => {
 						onClick={handleStartInterview}
 						disabled={generatingQuestions}
 						className={`bg-violet-700 transition-colors duration-200 rounded text-2xl px-4 py-1 ${
-							!generatingQuestions &&
-							'cursor-pointer hover:bg-violet-600'
+							!generatingQuestions
+								? 'cursor-pointer hover:bg-violet-600'
+								: 'opacity-75'
 						}`}
 					>
 						{!generatingQuestions
