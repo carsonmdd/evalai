@@ -57,7 +57,7 @@ export async function POST(request: Request) {
 			For each question-answer pair provided, generate the following:
 			- The question number (e.g., 1 for Q1, 2 for Q2, etc.).
 			- Overall score (1-10) based on the relevance, depth of knowledge, and communication clarity of the response. You may give very low or very high scores for extremely poor or exceptional responses respectively.
-			- Strengths comment highlighting the positive aspects of their response. If the response lacks any strengths, you may write "None".
+			- Strengths comment highlighting the positive aspects of their response. If the response lacks any strengths, you may write "None". However, always include a comment for areas for improvement.
 			- Areas for improvement comment suggesting how their response could be enhanced.
 
 			Examples of good feedback:
