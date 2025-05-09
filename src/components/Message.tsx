@@ -23,7 +23,7 @@ const Message = ({ sender, text, image }: Props) => {
 				className='rounded-full'
 			/>
 			<div
-				className={`max-w-[40rem] rounded-xl p-3 ${
+				className={`w-full max-w-[90%] rounded-xl p-3 break-words text-sm sm:text-base ${
 					sender === 'ai' ? 'bg-indigo-700' : 'bg-violet-700'
 				}`}
 			>

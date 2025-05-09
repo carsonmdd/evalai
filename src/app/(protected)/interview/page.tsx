@@ -105,12 +105,12 @@ const Interview = () => {
 	return (
 		<>
 			{!interviewStarted ? (
-				<div className='grow flex flex-col items-center justify-center'>
+				<div className='grow flex flex-col items-center justify-center px-4 sm:px-6 md:px-8'>
 					<h1 className='font-bold text-3xl mt-14 mb-6'>
 						Job Description
 					</h1>
 					<textarea
-						className='bg-[#1d262d] mb-12 border border-white rounded-xl w-[45rem] h-[30rem] p-5 text-xl focus:outline-none'
+						className='bg-[#1d262d] mb-12 border border-white rounded-xl w-full max-w-[45rem] h-[30rem] p-4 sm:p-5 text-base sm:text-xl focus:outline-none'
 						placeholder='Paste a job description here'
 						onChange={(e) => setJobDescription(e.target.value)}
 						onKeyDown={(e) =>
@@ -132,10 +132,11 @@ const Interview = () => {
 					</button>
 				</div>
 			) : (
-				<div className='grow flex flex-col items-center justify-end pb-3 relative'>
+				<div className='grow flex flex-col items-center justify-end pb-3 relative px-4 sm:px-6 md:px-8'>
+					{/* Chat container */}
 					<div
 						ref={chatContainerRef}
-						className='w-[70rem] h-[75vh] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
+						className='w-full max-w-[70rem] h-[75vh] mb-4 flex flex-col overflow-y-auto shadow-md px-3 py-5 bg-[#1d262d] rounded-lg'
 					>
 						{messages.map((msg, index) => (
 							<Message
@@ -150,28 +151,22 @@ const Interview = () => {
 							/>
 						))}
 					</div>
+
+					{/* Button/bar container */}
 					<div className='h-[60px] flex items-center justify-center'>
 						{interviewId ? (
-							<>
-								<Link
-									href={`/report/${interviewId}`}
-									className='cursor-pointer text-violet-500 text-xl hover:text-violet-400 transition-colors duration-200'
-								>
-									View report
-								</Link>
-							</>
+							<Link
+								href={`/report/${interviewId}`}
+								className='cursor-pointer text-violet-500 text-xl hover:text-violet-400 transition-colors duration-200'
+							>
+								View report
+							</Link>
+						) : interviewCompleted ? (
+							<div className='text-xl'>Generating report...</div>
 						) : (
-							<>
-								{interviewCompleted ? (
-									<div className='text-xl'>
-										Generating report...
-									</div>
-								) : (
-									<ResponseBar
-										onSubmitResponse={handleResponseSubmit}
-									/>
-								)}
-							</>
+							<ResponseBar
+								onSubmitResponse={handleResponseSubmit}
+							/>
 						)}
 					</div>
 				</div>

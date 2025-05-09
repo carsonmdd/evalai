@@ -12,6 +12,8 @@ const Navbar = () => {
 	const pathname = usePathname();
 	const [menuOpen, setMenuOpen] = useState(false);
 
+	const toggleMenu = () => setMenuOpen(!menuOpen);
+
 	return (
 		<nav className='fixed z-10 w-[98%] self-center flex justify-between items-center px-14 py-4 text-2xl font-bold bg-[#1a2228]/99 rounded-full'>
 			<div
@@ -53,10 +55,7 @@ const Navbar = () => {
 				)}
 			</div>
 
-			<button
-				className='md:hidden cursor-pointer'
-				onClick={() => setMenuOpen(!menuOpen)}
-			>
+			<button className='md:hidden cursor-pointer' onClick={toggleMenu}>
 				{menuOpen ? <X size={30} /> : <Menu size={30} />}
 			</button>
 
@@ -67,6 +66,7 @@ const Navbar = () => {
 						className={`hover:text-violet-400 transition-colors duration-200 ${
 							pathname === '/interview' ? 'text-violet-500' : ''
 						}`}
+						onClick={toggleMenu}
 					>
 						Interview
 					</Link>
@@ -75,6 +75,7 @@ const Navbar = () => {
 						className={`hover:text-violet-400 transition-colors duration-200 ${
 							pathname === '/history' ? 'text-violet-500' : ''
 						}`}
+						onClick={toggleMenu}
 					>
 						History
 					</Link>
