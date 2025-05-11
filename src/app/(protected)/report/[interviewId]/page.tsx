@@ -21,9 +21,9 @@ const Reports = async (props: Props) => {
 		}
 
 		return (
-			<div className='flex grow flex-col items-center justify-center text-xl p-[4rem]'>
+			<div className='flex grow flex-col items-center justify-center text-xl p-[1rem] sm:p-[2rem] md:p-[4rem]'>
 				<div>
-					<h1 className='text-2xl font-bold mb-8 justify-self-center mt-[4rem]'>
+					<h1 className='text-2xl font-bold mb-8 justify-self-center mt-[7rem]'>
 						Interview Report for{' '}
 						<ClientDatetime time={interview.startTime} />
 					</h1>
@@ -42,7 +42,7 @@ const Reports = async (props: Props) => {
 						</div>
 					</div>
 				</div>
-				<hr className='my-8 w-[700px]' />
+				<hr className='my-8 w-[90%] max-w-[700px]' />
 				{interview.questionResponses.map((qr, index) => (
 					<QrCard
 						key={index}

@@ -76,7 +76,7 @@ const History = () => {
 		return (
 			<div className='flex grow items-center justify-center p-[1rem] sm:p-[2rem] md:p-[4rem]'>
 				{interviews.length > 0 ? (
-					<div className='mt-[6rem]'>
+					<div className='mt-[4rem]'>
 						{/* Table for larger screens */}
 						<table className='w-full max-w-[60rem] hidden sm:table'>
 							<thead>
