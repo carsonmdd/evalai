@@ -20,6 +20,7 @@ const Navbar = () => {
 				className={`flex items-center justify-center gap-3 cursor-pointer hover:text-violet-400 transition-colors duration-200 ${
 					pathname === '/' ? 'text-violet-500' : ''
 				}`}
+				onClick={toggleMenu}
 			>
 				<Image
 					src='/ai-avatar.png'
